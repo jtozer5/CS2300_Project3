@@ -2,8 +2,7 @@
 
 data = dlmread('sysmat1.txt');
 prod_data = dlmread('prodvec1.txt');
-prod = prod_data(2:n+1);
-prod = (prod)';
+prod = prod_data(2:);
 
 
 n = data(1);
@@ -17,6 +16,7 @@ for c = 1:n
     end
 end
     
-matrix = [sys_data prod]; 
+% matrix = [sys_data prod]; 
 
-disp(matrix)
+disp(sys_data)
+disp(prod)
