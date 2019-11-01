@@ -7,16 +7,16 @@ prod = (prod)';
 
 
 n = data(1);
-sys_data = zeros(n);
+sys = zeros(n);
 
 i = 2;
 for c = 1:n
     for r = 1:n
-        sys_data(c, r) = data(i);
+        sys(c, r) = data(i);
         i = i + 1;
     end
 end
     
-matrix = [sys_data prod]; 
+sys_prod = [sys prod]; 
 
-disp(matrix)
+disp(sys_prod)
