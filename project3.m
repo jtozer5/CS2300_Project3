@@ -20,3 +20,10 @@ end
 sys_prod = [sys prod]; 
 
 disp(sys_prod)
+
+%Gets the row of the highest first column value.
+[maxNumber, row] = max(sys_prod(:,1));
+
+%Moves the row with the largest absolute value to the top.
+sys_prod([1,row],:) = sys_prod([row, 1],:);
+disp(sys_prod);
