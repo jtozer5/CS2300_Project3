@@ -45,3 +45,11 @@ for k = 1:n+1
     sys_prod(3,k) = firstRow*(sys_prod(1,k))+thirdRow*sys_prod(3,k);
 end
 disp(sys_prod);
+
+%Multiplies row 3 by -50.85, row 2 by -45.3 and add to form row
+secondRow = -sys_prod(3,2);
+thirdRow = sys_prod(2,2);
+for l = 1:n+1
+    sys_prod(3,l) = secondRow*(sys_prod(2,l))+thirdRow*sys_prod(3,l);
+end
+disp(sys_prod);
