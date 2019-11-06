@@ -2,11 +2,10 @@
 
 data = dlmread('sysmat1.txt');
 prod_data = dlmread('prodvec1.txt');
+n = data(1);
 prod = prod_data(2:n+1);
 prod = (prod)';
 
-
-n = data(1);
 sys = zeros(n);
 
 i = 2;
