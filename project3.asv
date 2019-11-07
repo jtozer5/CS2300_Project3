@@ -1,22 +1,57 @@
 % Project 3
 
-data = dlmread('sysmat1.txt');
-prod_data = dlmread('prodvec1.txt');
-prod = prod_data(2:);
-
-
+data = dlmread('sysmat2.txt');
+prod_data = dlmread('prodvec2.txt');
 n = data(1);
-sys_data = zeros(n);
+prod = prod_data(2:n+1);
+prod = (prod)';
+
+sys = zeros(n);
 
 i = 2;
 for c = 1:n
     for r = 1:n
-        sys_data(c, r) = data(i);
+        sys(c, r) = data(i);
         i = i + 1;
     end
 end
     
-% matrix = [sys_data prod]; 
+sys_prod = [sys prod]; 
+disp("The system matrix:");
+disp(sys_prod)
 
-disp(sys_data)
-disp(prod)
+%Gets the row of the highest first column value.
+[maxNumber, row] = max(sys_prod(:,1));
+
+%Moves the row with the largest absolute value to the top.
+sys_prod([1,row],:) = sys_prod([row, 1],:);
+
+z = 2;
+for j = 1:n-1
+    
+    disp(sys_prod);
+    for l = z:n
+        first_row = sys_prod(l,j);
+        second_row = -sys_prod(j,j);
+        for k = 1:n+1
+            sys_prod(l,k) = first_row * sys_prod(j,k) + second_row * sys_prod(l,k);
+        end
+    end
+    
+    disp("Column "+ j +":")
+    disp(sys_prod);
+    if(z < n)
+        if(abs(sys_prod(z,z)) < abs(sys_prod(z+1,z))
+            temp = sys_prod(z + 1,:);
+            sys_prod(z+1,:) = sys_prod(z,:);
+            sys_prod(z, :)=temp;
+        end
+    end
+    
+    z = z + 1;
+end
+
+%Now that it is in upper triangular form we can solve for the three values.
+disp("Solution vector:");
+solution = sys\prod;
+disp(solution);
