@@ -52,11 +52,6 @@ for j = 1:n-1
 end
 
 %Now that it is in upper triangular form we can solve for the three values.
-x_3 = sys_prod(3,4)/sys_prod(3,3);
-x_2=(sys_prod(2,4)-sys_prod(2,3)*x_3)/sys_prod(2,2);
-x_1=(sys_prod(1,4) - sys_prod(1,3)*x_2 - sys_prod(1,2)*x_3)/sys_prod(1,1);
-
 disp("Solution vector:");
-disp(x_1);
-disp(x_2);
-disp(x_3);
+x=inv(sys)*prod;
+disp(x);
