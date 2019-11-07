@@ -26,32 +26,30 @@ disp(sys_prod)
 %Moves the row with the largest absolute value to the top.
 sys_prod([1,row],:) = sys_prod([row, 1],:);
 
-%Zeros the element at (2,1) by multiplying the first row by 6.3, the second
-%row by -8.1 and adding them to create the new second row.
-firstRow = sys_prod(2,1);
-secondRow = -sys_prod(1,1);
-for j = 1:n + 1
-    sys_prod(2,j)=(firstRow*(sys_prod(1,j))+secondRow*sys_prod(2,j));
+z = 2;
+for j = 1:n-1
+    
+    disp(sys_prod);
+    for l = z:n
+        firstRow = sys_prod(l,j);
+        secondRow = -sys_prod(j,j);
+        for k = 1:n+1
+            sys_prod(l,k)=(firstRow*(sys_prod(j,k))+secondRow*sys_prod(l,k));
+        end
+    end
+    
+    disp("Column "+ j +":")
+    disp(sys_prod);
+    if(z<n)
+        if(abs(sys_prod(z,z))<abs(sys_prod(z+1,z)))
+            temp = sys_prod(z + 1,:);
+            sys_prod(z+1,:) = sys_prod(z,:);
+            sys_prod(z, :)=temp;
+        end
+    end
+    
+    z = z+1;
 end
-
-%Multiplies the first row by -7.5 and the third row by -8.1 and add to
-%create the new third row.
-firstRow = sys_prod(3,1);
-thirdRow = -sys_prod(1,1);
-for k = 1:n+1
-    sys_prod(3,k) = firstRow*(sys_prod(1,k))+thirdRow*sys_prod(3,k);
-end
-disp("Column 1:")
-disp(sys_prod);
-
-%Multiplies row 3 by -50.85, row 2 by -45.3 and add to form row
-secondRow = -sys_prod(3,2);
-thirdRow = sys_prod(2,2);
-for l = 1:n+1
-    sys_prod(3,l) = -(secondRow*(sys_prod(2,l))+thirdRow*sys_prod(3,l));
-end
-disp("Column 2:")
-disp(sys_prod);
 
 %Now that it is in upper triangular form we can solve for the three values.
 x_3 = sys_prod(3,4)/sys_prod(3,3);
